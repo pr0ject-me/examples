@@ -1,0 +1,15 @@
+﻿@page
+@model SimpleRazorPages.Pages.HelloModel
+@{
+    string? name = Request.Query["name"];
+    if (string.IsNullOrEmpty(name))
+        name = "Default";
+
+    DateTime now = DateTime.Now;
+    string greeting = now.Hour < 12 ? "Good Morning" : "Good Afternoon";
+}
+
+<h1>Hello, World!</h1>
+<h1>Hello, @name!</h1>
+<h1>@greeting, @name!</h1>
+

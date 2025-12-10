@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MinimalApi/MinimalApi.csproj" />
+  <Project Path="SimpleRazorPages/SimpleRazorPages.csproj" />
+</Solution>
