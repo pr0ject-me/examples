@@ -4,3 +4,38 @@ GET {{MinimalApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{MinimalApi_HostAddress}}/movies
+Accept: application/json
+
+###
+
+@movieId = 4b587cf1-f2c6-47a6-9a07-47bbe5cba025
+GET {{MinimalApi_HostAddress}}/movies/{{movieId}}
+Accept: application/json
+
+###
+
+POST {{MinimalApi_HostAddress}}/movies
+Content-Type: application/json
+{
+  "title": "Kruty",
+  "Director": {
+    "Name":"Olexyi Shaparev",
+    "Country":"Ukraine"
+  },
+  "ReleaseYear": 2018
+}
+
+###
+@movieToUpdateId = a6d9b7ac-0c1e-45da-8a0c-f326594146a1
+PUT {{MinimalApi_HostAddress}}/movies/{{movieToUpdateId}}
+Content-Type: application/json
+{
+  "title": "Kruty",
+  "Director": {
+    "Name":"Olexyi Shaparev",
+    "Country":"Ukraine"
+  },
+  "ReleaseYear": 2018
+}
