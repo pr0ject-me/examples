@@ -73,11 +73,13 @@ app.MapPut("/movies/{id:Guid}", async (Guid id, Movie movie, MoviesRepository re
     return Results.Ok(updatedMovie);
 
 });
+
+app.MapDelete("/movies/{id:Guid}", async (Guid id, MoviesRepository repository) => await repository.Delete(id));
 #endregion
 
 app.Run();
 
-#region Models
+#region Data
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
@@ -97,7 +99,7 @@ internal class MoviesRepository
 
     //Simulate async database calls
     public async Task<List<Movie>> GetAll() => await Task.FromResult(_movies);
-    
+
     public async Task<Movie?> GetById(Guid id) => await Task.FromResult(_movies.FirstOrDefault(m => m.Id == id));
 
     public async Task<Movie?> Add(Movie movie)
@@ -110,9 +112,18 @@ internal class MoviesRepository
     {
         var index = _movies.FindIndex(x => x.Id == movie.Id);
         if (index == -1) return default;
-            
+
         _movies[index] = movie;
         return movie;
+    }
+
+    public async Task<bool> Delete(Guid id)
+    {
+        var movie = _movies.FindIndex(m => m.Id == id);
+        if (movie == -1) return await Task.FromResult(false);
+
+        _movies.RemoveAt(movie);
+        return await Task.FromResult(true);
     }
 }
 #endregion

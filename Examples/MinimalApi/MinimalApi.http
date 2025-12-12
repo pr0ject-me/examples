@@ -39,3 +39,16 @@ Content-Type: application/json
   },
   "ReleaseYear": 2018
 }
+
+###
+@movieToDeleteId = aaa27ce5-f7a9-4ae7-8475-aec360b1d8d5
+DELETE {{MinimalApi_HostAddress}}/movies/{{movieToDeleteId}}
+Content-Type: application/json
+{
+  "title": "Kruty",
+  "Director": {
+    "Name":"Olexyi Shaparev",
+    "Country":"Ukraine"
+  },
+  "ReleaseYear": 2018
+}
