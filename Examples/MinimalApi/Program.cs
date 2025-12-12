@@ -74,7 +74,14 @@ app.MapPut("/movies/{id:Guid}", async (Guid id, Movie movie, MoviesRepository re
 
 });
 
-app.MapDelete("/movies/{id:Guid}", async (Guid id, MoviesRepository repository) => await repository.Delete(id));
+app.MapDelete("/movies/{id:Guid}", async (Guid id, MoviesRepository repository) =>
+{
+    var movie = await repository.GetById(id);
+    if (movie is null) Results.NotFound();
+
+    await repository.Delete(id);
+    return Results.NoContent();
+});
 #endregion
 
 app.Run();
